@@ -50,6 +50,13 @@ class ArcProgressBar @JvmOverloads constructor(
             }
             initPainters()
         }
+
+    var progressText : String? = null
+        set(value) {
+            field = value
+            initPainters()
+        }
+
     var max = 0
         set(max) {
             if (max > 0) {
@@ -200,7 +207,7 @@ class ArcProgressBar @JvmOverloads constructor(
         paint.shader = gradient
         canvas.drawArc(rectF, finishedStartAngle, finishedSweepAngle, false, paint)
         paint.shader = null
-        val text = progress.toString()
+        val text = progressText ?: progress.toString()
         if (!TextUtils.isEmpty(text)) {
             textPaint.color = textColor
             textPaint.textSize = textSize
